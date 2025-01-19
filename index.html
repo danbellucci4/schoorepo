@@ -1,0 +1,224 @@
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escolas Alphaville - Repositório</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="#">Escolas Alphaville</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addSchoolModal">
+              Adicionar Escola
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-4">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Filtros</h5>
+            <form id="filterForm">
+              <div class="mb-3">
+                <label class="form-label">Nome da Escola:</label>
+                <input type="text" class="form-select" id="nameFilter" placeholder="Digite o nome da escola">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Cidade:</label>
+                <select class="form-select" id="cityFilter">
+                  <option value="">Todas</option>
+                  <option value="barueri">Barueri</option>
+                  <option value="santana">Santana de Parnaíba</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Período:</label>
+                <div>
+                  <div class="form-check">
+                    <input class="form-check-input periodFilter" type="checkbox" id="filterPeriodMatutino" value="Matutino">
+                    <label class="form-check-label" for="filterPeriodMatutino">Matutino</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input periodFilter" type="checkbox" id="filterPeriodVespertino" value="Vespertino">
+                    <label class="form-check-label" for="filterPeriodVespertino">Vespertino</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input periodFilter" type="checkbox" id="filterPeriodIntegral" value="Integral">
+                    <label class="form-check-label" for="filterPeriodIntegral">Integral</label>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Faixa de Preço:</label>
+                <select class="form-select" id="priceFilter">
+                  <option value="">Todas</option>
+                  <option value="0-1000">Até R$ 1.000</option>
+                  <option value="1001-2000">R$ 1.001 - R$ 2.000</option>
+                  <option value="2001-3000">R$ 2.001 - R$ 3.000</option>
+                  <option value="3001+">Acima de R$ 3.000</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Nível de Ensino:</label>
+                <div>
+                  <div class="form-check">
+                    <input class="form-check-input levelFilter" type="checkbox" id="filterInfantil" value="infantil">
+                    <label class="form-check-label" for="filterInfantil">Educação Infantil</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input levelFilter" type="checkbox" id="filterFundamental1" value="fundamental1">
+                    <label class="form-check-label" for="filterFundamental1">Fundamental I</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input levelFilter" type="checkbox" id="filterFundamental2" value="fundamental2">
+                    <label class="form-check-label" for="filterFundamental2">Fundamental II</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input levelFilter" type="checkbox" id="filterMedio" value="medio">
+                    <label class="form-check-label" for="filterMedio">Ensino Médio</label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-8">
+        <div id="schoolsList" class="row">
+          <!-- Escolas serão inseridas aqui dinamicamente -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Adicionar Escola -->
+  <div class="modal fade" id="addSchoolModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Adicionar Nova Escola</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addSchoolForm">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Nome da Escola</label>
+                <input type="text" class="form-control" id="schoolName" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Cidade</label>
+                <select class="form-select" id="schoolCity" required>
+                  <option value="barueri">Barueri</option>
+                  <option value="santana">Santana de Parnaíba</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label">Endereço</label>
+              <input type="text" class="form-control" id="schoolAddress" required>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Telefone</label>
+                <input type="tel" class="form-control" id="schoolPhone" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Período das Aulas</label>
+                <div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="periodMatutino" value="matutino">
+                    <label class="form-check-label" for="periodMatutino">Matutino</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="periodVespertino" value="vespertino">
+                    <label class="form-check-label" for="periodVespertino">Vespertino</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="periodIntegral" value="integral">
+                    <label class="form-check-label" for="periodIntegral">Integral</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label">Níveis de Ensino e Mensalidades</label>
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="infantil">
+                    <label class="form-check-label">Educação Infantil</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <input type="number" class="form-control" id="infantilPrice" placeholder="Mensalidade R$" disabled>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="fundamental1">
+                    <label class="form-check-label">Fundamental I</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <input type="number" class="form-control" id="fundamental1Price" placeholder="Mensalidade R$" disabled>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="fundamental2">
+                    <label class="form-check-label">Fundamental II</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <input type="number" class="form-control" id="fundamental2Price" placeholder="Mensalidade R$" disabled>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="medio">
+                    <label class="form-check-label">Ensino Médio</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <input type="number" class="form-control" id="medioPrice" placeholder="Mensalidade R$" disabled>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label">Informações Adicionais</label>
+              <textarea class="form-control" id="schoolInfo" rows="3"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Salvar Escola</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
